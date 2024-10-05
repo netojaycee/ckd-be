@@ -29,12 +29,12 @@ def preprocess_input(data):
         raise ValueError(f"Error in data preprocessing: {e}")
 
 
-@app.route("/", methods=["GET"])
+@app.route("/api", methods=["GET"])
 def home():
     return "Hello, World!"
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/api/predict", methods=["POST"])
 def predict():
     try:
         # Extract data from the POST request
