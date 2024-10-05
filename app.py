@@ -30,6 +30,7 @@ def preprocess_input(data):
 
 
 @app.route("/api", methods=["GET"])
+@app.route("/", methods=["GET"])
 def home():
     return "Hello, World!"
 
@@ -44,8 +45,17 @@ def predict():
             return jsonify({"error": "Invalid input format, 'data' key not found"}), 400
 
         data = json_data["data"]
-        if not isinstance(data, list) or not all(isinstance(i, (int, float)) for i in data):
-            return jsonify({"error": "Invalid input format, expected a list of numbers under 'data'"}), 400
+        if not isinstance(data, list) or not all(
+            isinstance(i, (int, float)) for i in data
+        ):
+            return (
+                jsonify(
+                    {
+                        "error": "Invalid input format, expected a list of numbers under 'data'"
+                    }
+                ),
+                400,
+            )
 
         print(f"Received data: {data}")
 
